@@ -1,0 +1,21 @@
+import React, { Fragment } from 'react'
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
+import Home from "./Home/Home.js"
+import routeData from '../common/router.js'
+function App() {
+  console.log(routeData.length)
+  return (
+    <div className="App">
+      <Fragment>
+        <HashRouter>
+          <Switch >
+            <Route path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
+            <Redirect to={"/home"} />
+          </Switch>
+        </HashRouter>
+      </Fragment>
+    </div>
+  )
+}
+export default App
