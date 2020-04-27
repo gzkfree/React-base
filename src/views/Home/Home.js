@@ -29,24 +29,26 @@ class SiderDemo extends React.Component {
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             {
-              routeData.map(v => {
-                return v.routes.length > 1 ?
+              routeData.map((v, index) => {
+                return v.children ?
                   <SubMenu
-                    key="sub1"
+                    key={v.subMenu}
                     title={
                       <span>
                         <UserOutlined />
-                        <span>User</span>
+                        <span>{v.title}</span>
                       </span>
                     }
-                  >
-                    <Menu.Item key="3">Tom</Menu.Item>
-                    <Menu.Item key="4">Bill</Menu.Item>
-                    <Menu.Item key="5">Alex</Menu.Item>
+                  >{
+                      v.children.map(((v2, index2) => {
+                        return <Menu.Item key={v2.component}>{v2.name}</Menu.Item>
+                      }))
+                    }
+
                   </SubMenu> :
-                  <Menu.Item key="1">
+                  <Menu.Item key={v.component}>
                     <PieChartOutlined />
-                    <span>Option 1</span>
+                    <span>{v.title}</span>
                   </Menu.Item>
               })
             }
