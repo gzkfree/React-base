@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   DesktopOutlined,
@@ -9,6 +10,9 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import routeData from '../../common/router'
+import { Link } from 'react-router-dom'
+import Login from "../Login/Login.js"
+
 import './Home.css'
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -48,6 +52,7 @@ class SiderDemo extends React.Component {
                   </SubMenu> :
                   <Menu.Item key={v.component}>
                     <PieChartOutlined />
+                    <Link to="/home/login"></Link>
                     <span>{v.title}</span>
                   </Menu.Item>
               })
@@ -63,7 +68,7 @@ class SiderDemo extends React.Component {
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-              Bill is a cat.
+              <Route path="/home/login" component={Login} />
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Home from "./Home/Home.js"
+import Login from "./Login/Login.js"
 import routeData from '../common/router.js'
 function App() {
   console.log(routeData.length)
@@ -9,9 +10,10 @@ function App() {
       <Fragment>
         <HashRouter>
           <Switch >
+            <Route path="/" component={Home} />
             <Route path="/home" component={Home} />
-            <Route exact path="/" component={Home} />
-            <Redirect to={"/home"} />
+            {/* <Route path="/home/login" component={Login} /> */}
+            <Redirect from="/" to="/home" />
           </Switch>
         </HashRouter>
       </Fragment>
