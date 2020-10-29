@@ -2,20 +2,12 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb } from 'antd';
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import routeData from '../../common/router'
-import { Link } from 'react-router-dom'
+
 import Login from "../Login/Login.js"
 
-import './Home.css'
+import './index.css'
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+import Aside from './components/Aside'
 class SiderDemo extends React.Component {
   state = {
     collapsed: false,
@@ -31,34 +23,7 @@ class SiderDemo extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            {
-              routeData.map((v, index) => {
-                return v.children ?
-                  <SubMenu
-                    key={v.subMenu}
-                    title={
-                      <span>
-                        <UserOutlined />
-                        <span>{v.title}</span>
-                      </span>
-                    }
-                  >{
-                      v.children.map(((v2, index2) => {
-                        return <Menu.Item key={v2.component}>{v2.name}</Menu.Item>
-                      }))
-                    }
-
-                  </SubMenu> :
-                  <Menu.Item key={v.component}>
-                    <PieChartOutlined />
-                    <Link to="/home/login"></Link>
-                    <span>{v.title}</span>
-                  </Menu.Item>
-              })
-            }
-
-          </Menu>
+        <Aside></Aside>
         </Sider>
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
