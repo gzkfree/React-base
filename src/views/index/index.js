@@ -3,9 +3,9 @@ import { render } from "react-dom";
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb } from 'antd';
 
-import Login from "../Login/Login.js"
 
-import './index.css'
+import ContainerMain from '../../components/containerMain/index'
+import './index.less'
 const { Header, Content, Footer, Sider } = Layout;
 import Aside from './components/Aside'
 class SiderDemo extends React.Component {
@@ -33,7 +33,7 @@ class SiderDemo extends React.Component {
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-              <Route path="/home/login" component={Login} />
+              <ContainerMain></ContainerMain>
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>

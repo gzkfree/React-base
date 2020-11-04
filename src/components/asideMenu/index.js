@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Menu } from 'antd';
 const { SubMenu } = Menu;
-import Router from '../common/router'
+import Router from '../../common/router'
+import {Link} from 'react-router-dom'
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -24,12 +25,17 @@ export default class AsideMenu extends Component {
 
   // 无级菜单处理
   renderMenu({ path, title }) {
-    return <Menu.Item key={path}>{title}</Menu.Item>
+    return (
+      <Menu.Item key={path}>
+        <Link to={path}>{title}</Link>
+      </Menu.Item>
+    )
+
   }
   // 子级菜单处理
   renderSubMenu({ title, path, children }) {
     return (
-      <SubMenu key={path} icon={<UserOutlined />} title={title}>
+      <SubMenu key={path} icon={ <TeamOutlined/> } title={title} >
         {
           children && children.map(item => {
             return item.children && item.children.length > 0 ? this.renderSubMenu(item) : this.renderMenu(item)
@@ -46,7 +52,6 @@ export default class AsideMenu extends Component {
             return firstItem.children && firstItem.children.length > 0 ? this.renderSubMenu(firstItem) : this.renderMenu(firstItem)
           })
         }
-
       </Menu>
     )
   }
