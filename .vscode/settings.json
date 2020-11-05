@@ -3,4 +3,7 @@
         "out": false,
         "outExt": ".wxss"
       },
+      "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
 }
