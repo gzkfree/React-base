@@ -8,9 +8,9 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 // 读取环境配置
 const readEnv = require("./readEnv");
-const env = readEnv("../.env.prod");
+const env = readEnv("../.env.test");
 module.exports = merge(baseWebpackConfig, {
-  mode: "production",
+  mode: "test",
   plugins: [
     new HtmlWebpackPlugin({
       template: "public/index.html",
