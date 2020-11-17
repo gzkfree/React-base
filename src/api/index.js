@@ -1,7 +1,7 @@
 import request from "../utils/request";
 
 export function login(oData) {
-  return request("post", "/pc/login", oData, 0);
+  return request("post", "/base/app_login/f/admin_login", oData, 0);
 }
 // // 渠道列表
 // getChannelList(oData){

@@ -4,73 +4,90 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import "./index.less";
 import { login } from "../../api/index";
 let Base64 = require("js-base64").Base64;
-const Login = () => {
-  const onFinish = (values) => {
+import { connect } from "react-redux";
+
+class Login extends Component {
+  onFinish = (values) => {
+    console.log(this.props.Authorization);
+    this.props.Authorization_update(1);
+    console.log(this.props.Authorization);
     console.log("Success:", values);
     login({
-      userName: Base64.encode(values.username),
-      password: Base64.encode(values.password),
+      username: values.username,
+      password: values.password,
     }).then((res) => {
       console.log(res);
     });
   };
 
-  const onFinishFailed = (errorInfo) => {
+  onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-
-  return (
-    <div className="login-wrap">
-      <div className="ms-login">
-        <div className="ms-title">后台管理系统</div>
-        <Form
-          name="basic"
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-        >
-          <Form.Item
-            name="username"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
+  render() {
+    return (
+      <div className="login-wrap">
+        <div className="ms-login">
+          <div className="ms-title">后台管理系统</div>
+          <Form
+            name="basic"
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={this.onFinish}
+            onFinishFailed={this.onFinishFailed}
           >
-            <Input
-              addonBefore={<UserOutlined className="site-form-item-icon" />}
-            />
-          </Form.Item>
+            <Form.Item
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your username!",
+                },
+              ]}
+            >
+              <Input
+                addonBefore={<UserOutlined className="site-form-item-icon" />}
+              />
+            </Form.Item>
 
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
-            <Input.Password
-              addonBefore={<LockOutlined className="site-form-item-icon" />}
-            />
-          </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+            >
+              <Input.Password
+                addonBefore={<LockOutlined className="site-form-item-icon" />}
+              />
+            </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+            <Form.Item name="remember" valuePropName="checked">
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              登录
-            </Button>
-          </Form.Item>
-        </Form>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                登录
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+}
+import { Authorization_update } from "../../store/action/user";
+const mapStateToProps = (state) => {
+  return {
+    Authorization: state.user.Authorization,
+  };
 };
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    Authorization_update: (data) => dispatch(Authorization_update(data)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

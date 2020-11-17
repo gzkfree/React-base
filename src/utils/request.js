@@ -1,25 +1,27 @@
 import axios from "axios";
 // import router from "../router/index";
-// import store from "../store/store";
+import store from "../store/index";
+import { Authorization_update } from "../store/action/user";
 const service = axios.create({
   // process.env.NODE_ENV === 'development' 来判断是否开发环境
   headers: { "content-type": "application/json;charset=utf-8" },
+  baseURL: process.env.VUE_APP_BASEURL,
   timeout: 10000,
 });
-let baseUrlArr = [];
-if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
-  baseUrlArr = [
-    `${process.env.VUE_APP_BASEURL}/api/admin`, //用于请求用户业务
-    `${process.env.VUE_APP_BASEURL}/api/insurance/`, //用于请求保险业务
-    `${process.env.VUE_APP_BASEURL}/auth/oauth/token`, //请求toekn
-  ];
-} else {
-  baseUrlArr = [
-    `path/api/admin`, //用于请求用户业务
-    `path/api/insurance/`, //用于请求保险业务
-    `path/auth/oauth/token`, //请求toekn
-  ];
-}
+// let baseUrlArr = [];
+// if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "production") {
+//   baseUrlArr = [
+//     `${process.env.VUE_APP_BASEURL}/api/admin`, //用于请求用户业务
+//     `${process.env.VUE_APP_BASEURL}/api/insurance/`, //用于请求保险业务
+//     `${process.env.VUE_APP_BASEURL}/auth/oauth/token`, //请求toekn
+//   ];
+// } else {
+//   baseUrlArr = [
+//     `path/api/admin`, //用于请求用户业务
+//     `path/api/insurance/`, //用于请求保险业务
+//     `path/auth/oauth/token`, //请求toekn
+//   ];
+// }
 
 let getTicket = function () {
   service.defaults.baseURL = "";
@@ -54,12 +56,10 @@ service.interceptors.response.use(
       } else {
         // Message.error(response.data.message)
         if (response.data.code === 401) {
-          router.push({
-            path: "/login",
-          });
-          getTicket().then((res) => {
-            store.dispatch("setAuth", res.data.token);
-          });
+          // getTicket().then((res) => {
+          //   store.dispatch(Authorization_update(res.data.token));
+          //   console.log(store.getState("Authorization"));
+          // });
         }
         return Promise.reject(response.data);
       }
@@ -76,43 +76,45 @@ service.interceptors.response.use(
 const http = function (methods, url, oData, urlType, config) {
   console.log(methods, url, oData);
   //   let Authorization = store.getters.getAuthorization;
-  let Authorization = "";
-  service.defaults.baseURL = baseUrlArr[urlType];
-  if (Authorization) {
-    switch (methods.toLowerCase()) {
-      case "get":
-        return config
-          ? service.get(url, { params: oData, ...config })
-          : service.get(url, { params: oData });
-      case "post":
-        return service.post(url, oData, config);
-      case "put":
-        return service.put(url, oData, config);
-      case "delete":
-        return config
-          ? service.delete(url, { params: oData, ...config })
-          : service.delete(url, { params: oData });
-    }
-  } else {
-    return getTicket().then((res) => {
-      service.defaults.baseURL = baseUrlArr[urlType];
-      store.dispatch("setAuth", res.data.token);
-      switch (methods.toLowerCase()) {
-        case "get":
-          return config
-            ? service.get(url, { params: oData, ...config })
-            : service.get(url, { params: oData });
-        case "post":
-          return service.post(url, oData, config);
-        case "put":
-          return service.put(url, oData, config);
-        case "delete":
-          return config
-            ? service.delete(url, { params: oData, ...config })
-            : service.delete(url, { params: oData });
-      }
-    });
+  // let Authorization = "";
+  // service.defaults.baseURL = baseUrlArr[urlType];
+  // if (Authorization) {
+  switch (methods.toLowerCase()) {
+    case "get":
+      return config
+        ? service.get(url, { params: oData, ...config })
+        : service.get(url, { params: oData });
+    case "post":
+      return service.post(url, null, { params: oData, ...config });
+    case "put":
+      return service.put(url, oData, config);
+    case "delete":
+      return config
+        ? service.delete(url, { params: oData, ...config })
+        : service.delete(url, { params: oData });
   }
+  // }
+  // else {
+  //   return getTicket().then((res) => {
+  //     service.defaults.baseURL = baseUrlArr[urlType];
+  //     store.dispatch(Authorization_update(res.data.token));
+  //     console.log(store.getState().user.Authorization);
+  //     switch (methods.toLowerCase()) {
+  //       case "get":
+  //         return config
+  //           ? service.get(url, { params: oData, ...config })
+  //           : service.get(url, { params: oData });
+  //       case "post":
+  //         return service.post(url, oData, config);
+  //       case "put":
+  //         return service.put(url, oData, config);
+  //       case "delete":
+  //         return config
+  //           ? service.delete(url, { params: oData, ...config })
+  //           : service.delete(url, { params: oData });
+  //     }
+  //   });
+  // }
 };
 
 export default http;

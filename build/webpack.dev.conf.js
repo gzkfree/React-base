@@ -48,15 +48,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     noInfo: true,
     open: true,
     quiet: false,
-    proxy: {
-      "/path": {
-        target: "https://famousdoctor.dev.vdaifu.com",
-        changeOrigin: true,
-        pathRewrite: {
-          "^/path": "/",
-        },
-      },
-    },
+    // proxy: {
+    //   "/path": {
+    //     target: "https://famousdoctor.dev.vdaifu.com",
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       "^/path": "/",
+    //     },
+    //   },
+    // },
   },
 });
 module.exports = new Promise((resolve, reject) => {

@@ -1,7 +1,13 @@
 const stateData = {
-  Authorization: "",
+  Authorization: "5555",
 };
 const userReducer = function (state = stateData, action) {
-  return state;
+  switch (action.type) {
+    case "AUTHORIZATION_UPDATE": {
+      return { ...state, Authorization: action.data };
+    }
+    default:
+      return state;
+  }
 };
 export default userReducer;
