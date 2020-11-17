@@ -73,7 +73,7 @@ service.interceptors.response.use(
   }
 );
 
-const http = function (methods, url, oData, urlType, config) {
+const http = function ({ methods, url, oData, urlType, config }) {
   console.log(methods, url, oData);
   //   let Authorization = store.getters.getAuthorization;
   // let Authorization = "";
