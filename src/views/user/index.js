@@ -2,6 +2,6 @@ import React, { Component } from "react";
 
 export default class User extends React.Component {
   render() {
-    return <div>用户</div>
+    return <div>用户</div>;
   }
 }

@@ -51,7 +51,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     if (response.status === 200) {
-      if (response.data.code === 200) {
+      if (response.data.code === 1) {
         return Promise.resolve(response.data);
       } else {
         // Message.error(response.data.message)
@@ -73,7 +73,7 @@ service.interceptors.response.use(
   }
 );
 
-const http = function ({ methods, url, oData, urlType, config }) {
+const http = function (methods, url, oData, urlType, config) {
   console.log(methods, url, oData);
   //   let Authorization = store.getters.getAuthorization;
   // let Authorization = "";
@@ -85,7 +85,13 @@ const http = function ({ methods, url, oData, urlType, config }) {
         ? service.get(url, { params: oData, ...config })
         : service.get(url, { params: oData });
     case "post":
-      return service.post(url, null, { params: oData, ...config });
+      console.log(oData);
+      if (oData.params) {
+        return service.post(url, null, oData, config);
+      } else {
+        return service.post(url, oData, config);
+      }
+
     case "put":
       return service.put(url, oData, config);
     case "delete":

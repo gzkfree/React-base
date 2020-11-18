@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import { Menu } from 'antd';
+import { Menu } from "antd";
 const { SubMenu } = Menu;
-import Router from '../../common/router'
-import {Link} from 'react-router-dom'
+import Router from "../../common/router";
+import { Link } from "react-router-dom";
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
   UserOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 export default class AsideMenu extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   // 无级菜单
   // <Menu.Item key={v.component}>
@@ -29,30 +29,31 @@ export default class AsideMenu extends Component {
       <Menu.Item key={path}>
         <Link to={path}>{title}</Link>
       </Menu.Item>
-    )
-
+    );
   }
   // 子级菜单处理
   renderSubMenu({ title, path, children }) {
     return (
-      <SubMenu key={path} icon={ <TeamOutlined/> } title={title} >
-        {
-          children && children.map(item => {
-            return item.children && item.children.length > 0 ? this.renderSubMenu(item) : this.renderMenu(item)
-          })
-        }
+      <SubMenu key={path} icon={<TeamOutlined />} title={title}>
+        {children &&
+          children.map((item) => {
+            return item.children && item.children.length > 0
+              ? this.renderSubMenu(item)
+              : this.renderMenu(item);
+          })}
       </SubMenu>
-    )
+    );
   }
   render() {
     return (
-      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        {
-          Router && Router.map(firstItem => {
-            return firstItem.children && firstItem.children.length > 0 ? this.renderSubMenu(firstItem) : this.renderMenu(firstItem)
-          })
-        }
+      <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+        {Router &&
+          Router.map((firstItem) => {
+            return firstItem.children && firstItem.children.length > 0
+              ? this.renderSubMenu(firstItem)
+              : this.renderMenu(firstItem);
+          })}
       </Menu>
-    )
+    );
   }
 }

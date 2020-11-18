@@ -8,15 +8,14 @@ import { connect } from "react-redux";
 
 class Login extends Component {
   onFinish = (values) => {
-    console.log(this.props.Authorization);
-    this.props.Authorization_update(1);
-    console.log(this.props.Authorization);
     console.log("Success:", values);
     login({
       username: values.username,
       password: values.password,
     }).then((res) => {
-      console.log(res);
+      this.props.Authorization_update(res.result.access_token);
+      this.props.history.push("/index");
+      console.log(this.props.Authorization);
     });
   };
 
