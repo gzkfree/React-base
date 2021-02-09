@@ -1,5 +1,5 @@
 const stateData = {
-  Authorization: "",
+  Authorization: "582",
 };
 const userReducer = function (state = stateData, action) {
   return state;
