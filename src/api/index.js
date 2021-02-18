@@ -1,7 +1,10 @@
 import request from "../utils/request";
 
-export function login(oData) {
-  return request("post", "/pc/login", oData, 0);
+export function login(data) {
+  return request("post", "weblogin", data);
+}
+export function getHotMovie(data) {
+  return request("post", "getHotMovie", data);
 }
 // // 渠道列表
 // getChannelList(oData){

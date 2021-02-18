@@ -8,13 +8,15 @@ import { connect } from "react-redux";
 
 class Login extends Component {
   onFinish = (values) => {
-    console.log(this.props.Authorization);
     console.log("Success:", values);
     login({
-      userName: Base64.encode(values.username),
-      password: Base64.encode(values.password),
+      username: values.username,
+      password: values.password,
     }).then((res) => {
       console.log(res);
+      this.props.Authorization_update(res.data);
+      this.props.history.push("/index");
+      console.log(this.props.Authorization);
     });
   };
 
@@ -77,10 +79,15 @@ class Login extends Component {
     );
   }
 }
-
+import { Authorization_update } from "../../store/action/user";
 const mapStateToProps = (state) => {
   return {
     Authorization: state.user.Authorization,
   };
 };
-export default connect(mapStateToProps, null)(Login);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    Authorization_update: (data) => dispatch(Authorization_update(data)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

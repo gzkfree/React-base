@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from "antd";
 
 import ContainerMain from "../../components/containerMain/index";
+import MyBreadcrumb from "./components/Breadcrumb";
 import "./index.less";
 const { Header, Content, Footer, Sider } = Layout;
 import Aside from "./components/Aside";
@@ -30,10 +31,7 @@ class SiderDemo extends React.Component {
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
+            <MyBreadcrumb></MyBreadcrumb>
             <div
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}

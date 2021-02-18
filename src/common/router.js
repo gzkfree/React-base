@@ -1,24 +1,21 @@
 export default [
   {
-    title: "微官网", // 页面标题&一级nav标题
+    title: "控制台", // 页面标题&一级nav标题
     icon: "icon-home",
-    path: "/front/approval/undo", // 路由url
-    component: "minweb", // 路由组件
+    path: "/index", // 路由url
   },
   {
     title: "电影管理", // 页面标题&一级nav标题
     icon: "icon-home",
-    path: "index/movie",
+    path: "/index/movie",
     children: [
       {
         title: "电影列表", // 次级nav标题
-        path: "/index/user/index", // 路由url
-        component: "vipList", // 路由组件
+        path: "/index/movie/list", // 路由url
       },
       {
-        title: "会员卡列表", // 次级nav标题
-        path: "/vip/cardList", // 路由url
-        component: "vipCardList", // 路由组件
+        title: "电影添加", // 次级nav标题
+        path: "/index/movie/add", // 路由url
       },
     ],
   },
