@@ -68,10 +68,10 @@ class MyBreadcrumb extends React.Component {
     return (
       <Fragment>
         <Breadcrumb style={{ margin: "16px 0" }}>
-          {currentBreadcrumb.children &&
+          {/* {currentBreadcrumb.children &&
             currentBreadcrumb.children.map((item) => {
               return <Breadcrumb.Item>{item.title}</Breadcrumb.Item>;
-            })}
+            })} */}
         </Breadcrumb>
       </Fragment>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { HashRouter, Switch } from "react-router-dom";
 import PrivateRouter from "../../components/privateRouter/index";
-import User from "../../views/user/index";
+import User from "../../views/movie/index";
 import Home from "../../views/home/index";
 class ContainerMain extends Component {
   constructor(props) {

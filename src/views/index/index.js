@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from "antd";
-
 import ContainerMain from "../../components/containerMain/index";
 import MyBreadcrumb from "./components/Breadcrumb";
 import "./index.less";
@@ -30,7 +27,10 @@ class SiderDemo extends React.Component {
         </Sider>
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
-          <Content style={{ margin: "0 16px" }}>
+          <Content
+            className="container"
+            style={{ margin: "0 16px", height: "500px", overflowY: "auto" }}
+          >
             <MyBreadcrumb></MyBreadcrumb>
             <div
               className="site-layout-background"
@@ -40,7 +40,7 @@ class SiderDemo extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
+            reactPcDemo ©2018 Created by Ahken
           </Footer>
         </Layout>
       </Layout>

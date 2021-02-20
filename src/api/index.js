@@ -6,6 +6,9 @@ export function login(data) {
 export function getHotMovie(data) {
   return request("post", "getHotMovie", data);
 }
+export function getHotMovieDetail(data) {
+  return request("post", "getHotMovieDetail", data);
+}
 // // 渠道列表
 // getChannelList(oData){
 //     return request('post', '/distributors/page', oData, 1)

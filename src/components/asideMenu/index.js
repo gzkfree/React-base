@@ -55,7 +55,11 @@ class AsideMenu extends Component {
   // 子级菜单处理
   renderSubMenu({ title, path, children }) {
     return (
-      <SubMenu key={path} icon={<TeamOutlined />} title={title}>
+      <SubMenu
+        key={path}
+        icon={<i className="iconfont">&#xe65b;</i>}
+        title={title}
+      >
         {children &&
           children.map((item) => {
             return item.children && item.children.length > 0
